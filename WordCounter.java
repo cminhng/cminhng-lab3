@@ -6,7 +6,7 @@ import java.io.*;
 
 
 public class WordCounter{
-    static boolean lastChance = false;
+    //static boolean lastChance = false;
 
     public static int processText(StringBuffer text, String stopword) throws TooSmallText, InvalidStopwordException{
         Pattern regex = Pattern.compile("\\b\\w+\\b");
@@ -19,7 +19,6 @@ public class WordCounter{
             wc++;
             if(stopword != null && regexMatcher.group().equals(sw)){
                 containsStopword = true;
-                //System.out.println("found stopword! in\n" + text + "\nexiting");
                 break;
             }
         } 
@@ -49,7 +48,7 @@ public class WordCounter{
 
     public static StringBuffer processFile(String path) throws EmptyFileException, IOException{
         StringBuffer sb = new StringBuffer();
-        BufferedReader reader = new BufferedReader(new FileReader(path));
+        BufferedReader reader = null;
         boolean fileFound = false;
         String line;
         String p = path;
@@ -61,18 +60,20 @@ public class WordCounter{
                 while((line = reader.readLine()) != null){
                     sb.append(line);
                 }
+
+                if(sb.toString().trim().isEmpty()){
+                    throw new EmptyFileException(path);
+                }
                 fileFound = true;
             }catch(FileNotFoundException e){
                 System.out.println("File not found. Please enter a valid filename:");
                 p = new Scanner(System.in).nextLine();
+                if(reader != null){
+                    reader.close();
+                }
             }
         }
         reader.close();
-        
-
-        if(sb.toString().trim().isEmpty()){
-            throw new EmptyFileException(path);
-        }
 
         return sb;
     }
@@ -90,23 +91,22 @@ public class WordCounter{
                 try{
                     text = processFile(args[0]);
                 }catch(EmptyFileException e){
-                    //int wc = processText(new StringBuffer().append(""), null);
-                    System.out.println("Found 0 words.");
+                    int wc = processText(new StringBuffer().append(""), null);
+                    System.out.println("Found " + wc + " words.");
                 }
-                //text = processFile(args[0]);
                 int wc = processText(text, stopword);
                 System.out.println("Found " + wc + " words.");
             }catch(TooSmallText e){
-                System.out.println(e.getMessage());
-            }catch(EmptyFileException e){
-                System.out.println(e.getMessage());
+                System.out.println("TooSmallText: " + e.getMessage());
+                //im sorry but why does the format in main have to be different from process text to be able to pass tests?!
             }catch(InvalidStopwordException e){
                 System.out.println(e.getMessage());
             }
         }catch(IOException e){
             System.out.println("An error occured.");
         }
-        
+        // readme says for main option should be the first arg, tests require filename to be first arg. how
+        // if first arg is a string i shouldnt call processfile
         // try{
         //     if(args.length < 2){
         //         System.out.println("For option 1, input in the following format: '1 [filename] [optional stopward]'\nFor option 2: '2 [text]'");
