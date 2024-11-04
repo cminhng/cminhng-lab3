@@ -48,7 +48,7 @@ public class WordCounter {
                 }
                 
                 readSuccessful = true;
-            } catch (FileNotFoundException e){
+            } catch (IOException e){
                 System.out.println("File not found: " + e.getMessage() + ". Please enter a valid filename:");
                 path = new java.util.Scanner(System.in).nextLine();
             }
@@ -64,39 +64,53 @@ public class WordCounter {
     public static void main(String[] args) {
         StringBuffer text = null;
         String stopword = null;
-        try{
-            if(args.length < 2){
-                System.out.println("For option 1, input in the following format: '1 [filename] [optional stopward]'\nFor option 2: '2 [text]'");
-                return;
-            }
-            
-            String option = args[0];
-            if(option.equals("1")){
-                String path = args[1];
-                stopword = args.length > 2 ? args[2] : null;
-                text = processFile(path);
-            }else if(option.equals("2")){
-                text = new StringBuffer(args[1]);
-            }else{
-                System.out.println("Please specify a valid option, 1 or 2.");
-                return;
-            }
-            try{
-                int wc = processText(text, stopword);
-                System.out.println("Word count: " + wc);
-            }catch(InvalidStopwordException e){
-                System.out.println(e.getMessage());
-            }catch(TooSmallText e){
-                System.out.println(e.getMessage());
 
-            }
+        stopword = args.length > 1 ? args[1] : null;
+
+        text = new StringBuffer(args[0]);
+
+        try{
+            int wc = processText(text, stopword);
+            //System.out.println("Word count: " + wc);
+        }catch(InvalidStopwordException e){
+            System.out.println(e.getMessage());
+        }catch(TooSmallText e){
+            System.out.println(e.getMessage());
+
+        }
+        // try{
+        //     if(args.length < 2){
+        //         System.out.println("For option 1, input in the following format: '1 [filename] [optional stopward]'\nFor option 2: '2 [text]'");
+        //         return;
+        //     }
+            
+        //     String option = args[0];
+        //     if(option.equals("1")){
+        //         String path = args[1];
+        //         stopword = args.length > 2 ? args[2] : null;
+        //         text = processFile(path);
+        //     }else if(option.equals("2")){
+        //         text = new StringBuffer(args[1]);
+        //     }else{
+        //         System.out.println("Please specify a valid option, 1 or 2.");
+        //         return;
+        //     }
+        //     try{
+        //         int wc = processText(text, stopword);
+        //         System.out.println("Word count: " + wc);
+        //     }catch(InvalidStopwordException e){
+        //         System.out.println(e.getMessage());
+        //     }catch(TooSmallText e){
+        //         System.out.println(e.getMessage());
+
+        //     }
             
               
-        }catch(EmptyFileException e){
-            System.out.println(e.getMessage());
-        }catch(IOException e){
-            System.out.println(e.getMessage());
-        }
+        // }catch(EmptyFileException e){
+        //     System.out.println(e.getMessage());
+        // }catch(IOException e){
+        //     System.out.println(e.getMessage());
+        // }
 
     }
 
