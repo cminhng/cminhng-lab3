@@ -6,7 +6,8 @@ import java.io.*;
 
 
 public class WordCounter{
-    //static boolean lastChance = false;
+    //FOR USER INPUT NOT TEST CASES
+    static boolean lastChance = false;
 
     public static int processText(StringBuffer text, String stopword) throws TooSmallText, InvalidStopwordException{
         Pattern regex = Pattern.compile("\\b\\w+\\b");
@@ -32,15 +33,20 @@ public class WordCounter{
         }
 
         if(stopword != null && !containsStopword){
-            // if(!lastChance){
-            //     // System.out.println("Stopword not found. Please enter a valid stopword.\n");
-            //     // sw = new Scanner(System.in).nextLine();
-            //     lastChance = true;
-            //     // processText(text, sw);
-            // }else{
+            //--------------TEST CASES
+            /*
+            throw new InvalidStopwordException(stopword);
+            */
+
+            //--------------FOR USER INPUT NOT TEST CASES
+            if(!lastChance){
+                System.out.println("Stopword not found. Please enter a valid stopword.\n");
+                sw = new Scanner(System.in).nextLine();
+                lastChance = true;
+                processText(text, sw);
+            }else{
                 throw new InvalidStopwordException(stopword);
-            //}
-            //why do some of these tests contradict the readme?!?! 
+            }
         }
 
         return wc;
@@ -81,7 +87,7 @@ public class WordCounter{
         StringBuffer text = null;
         String stopword = null;
         //-------THIS CODE IS FOR PASSING TESTS--------//
-        try{
+        /*try{
             if(args.length == 0){
                 System.out.println("Please provide a valid filename and optional stopword.");
                 return;
@@ -105,41 +111,41 @@ public class WordCounter{
             }
         }catch(IOException e){
             System.out.println("An error occured.");
-        }
-        //-------------THIS CODE IS FOR USER INPUT------------------//
-        // try{
-        //     if(args.length < 2){
-        //         System.out.println("For option 1, input in the following format: '1 [filename] [optional stopward]'\nFor option 2: '2 [text]'");
-        //         return;
-        //     }
-            
-        //     String option = args[0];
-        //     if(option.equals("1")){
-        //         String path = args[1];
-        //         stopword = args.length > 2 ? args[2] : null;
-        //         text = processFile(path);
-        //     }else if(option.equals("2")){
-        //         text = new StringBuffer(args[1]);
-        //     }else{
-        //         System.out.println("Please specify a valid option, 1 or 2.");
-        //         return;
-        //     }
-        //     try{
-        //         int wc = processText(text, stopword);
-        //         System.out.println("Word count: " + wc);
-        //     }catch(InvalidStopwordException e){
-        //         System.out.println(e.getMessage());
-        //     }catch(TooSmallText e){
-        //         System.out.println(e.getMessage());
+        }*/
 
-        //     }
+        //-------------THIS CODE IS FOR USER INPUT------------------//
+        try{
+            if(args.length < 2){
+                System.out.println("For option 1, input in the following format: '1 [filename] [optional stopward]'\nFor option 2: '2 [text]'");
+                return;
+            }
+            
+            String option = args[0];
+            if(option.equals("1")){
+                String path = args[1];
+                stopword = args.length > 2 ? args[2] : null;
+                text = processFile(path);
+            }else if(option.equals("2")){
+                text = new StringBuffer(args[1]);
+            }else{
+                System.out.println("Please specify a valid option, 1 or 2.");
+                return;
+            }
+            try{
+                int wc = processText(text, stopword);
+                System.out.println("Word count: " + wc);
+            }catch(InvalidStopwordException e){
+                System.out.println(e.getMessage());
+            }catch(TooSmallText e){
+                System.out.println(e.getMessage());
+            }
             
               
-        // }catch(EmptyFileException e){
-        //     System.out.println(e.getMessage());
-        // }catch(IOException e){
-        //     System.out.println(e.getMessage());
-        // }
+        }catch(EmptyFileException e){
+            System.out.println(e.getMessage());
+        }catch(IOException e){
+            System.out.println(e.getMessage());
+        }
 
     }
 
