@@ -1,0 +1,2 @@
+For option 1, input in the following format: '1 [filename] [optional stopward]'
+For option 2: '2 [text]'
