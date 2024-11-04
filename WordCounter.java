@@ -4,39 +4,64 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException; 
 
 public class WordCounter {
-    boolean containsStopword;
+    static boolean containsStopword;
 
-    public WordCounter(){
-        containsStopword = false;
-    }
+    // public WordCounter(){
+    //     containsStopword = false;
+    // }
+
     static public int processText(StringBuffer text, String stopword){
-        return 0;
+        Pattern regex = Pattern.compile("\\b\\w+\\b");
+        Matcher regexMatcher = regex.matcher(text);
+        int wc = 0;
+
+        while (regexMatcher.find()) {
+            //System.out.println("I just found the word: " + regexMatcher.group());
+            wc++;
+            if(regexMatcher.group().equals(stopword)){
+                containsStopword = true;
+                break;
+            }
+        } 
+
+        if(wc < 5){
+            throw new TooSmallText(""+wc);
+        }
+
+        if(stopword != null && containsStopword == false){
+            throw new InvalidStopwordException(stopword);
+        }
+
+        return wc;
     }
 
-    static public StringBuffer processFile(String path){
-        //if file cant open
-        //prompt re-enter filename
-        //file is empty
-            //return emptyfileexception
-        
-        //Scanner sc1 = new Scanner(new BufferedReader(new InputStreamReader(new FileInputStream("data.txt"))));
-        
-        // Pattern regex = Pattern.compile("your regular expression here");
-        // Matcher regexMatcher = regex.matcher(text);
-        // while (regexMatcher.find()) {
-        //     System.out.println("I just found the word: " + regexMatcher.group());
-        // } 
-        //\b\w+\b
-        //\\b\\w+\\b
+    static public StringBuffer processFile(String path) throws EmptyFileException{
         StringBuffer sb = new StringBuffer();
-
         return sb;
     }
     public static void main(String[] args) {
         //ask for method 1 or 2
             //1: ask for text file
+        if(args.length < 1){
+            System.out.println("Choose how you'd like your text to be processed: 1 (file) or 2 (text).");
+            return;
+        }
+        String option = args[0];
+        String path = "";
+
+        try {
+            //process file
+
+            processFile(path);
+
+            } catch(EmptyFileException e) {
+                EmptyFileException help = new EmptyFileException(path + " was empty");
+                System.out.println(help);
+            }
+              
 
 
     }

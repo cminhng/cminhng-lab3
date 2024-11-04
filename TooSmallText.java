@@ -1,9 +1,5 @@
 public class TooSmallText extends Exception{
     public TooSmallText(String message) {
-        super(message);
-    }
-    
-    public String toString() {
-        return "TooSmallText: " + getMessage();
+        super("TooSmallText: Only found " + message + " words.");
     }
 }
