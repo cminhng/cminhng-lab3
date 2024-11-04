@@ -80,6 +80,7 @@ public class WordCounter{
     public static void main(String[] args) {
         StringBuffer text = null;
         String stopword = null;
+        //-------THIS CODE IS FOR PASSING TESTS--------//
         try{
             if(args.length == 0){
                 System.out.println("Please provide a valid filename and optional stopword.");
@@ -105,8 +106,7 @@ public class WordCounter{
         }catch(IOException e){
             System.out.println("An error occured.");
         }
-        // readme says for main option should be the first arg, tests require filename to be first arg. how
-        // if first arg is a string i shouldnt call processfile
+        //-------------THIS CODE IS FOR USER INPUT------------------//
         // try{
         //     if(args.length < 2){
         //         System.out.println("For option 1, input in the following format: '1 [filename] [optional stopward]'\nFor option 2: '2 [text]'");

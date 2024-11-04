@@ -1,0 +1,47 @@
+commit a7e3af2edad2ca7e3e9150a6036aacd39d80f0ff
+Author: christine nguyen <cminhng@cmng-MacBook-Pro.local>
+Date:   Mon Nov 4 01:18:25 2024 -0800
+
+    passing 14 test cases
+
+commit 63856bb09a728046eeab3283b8be5de1823eb212
+Author: christine nguyen <cminhng@cmng-MacBook-Pro.local>
+Date:   Mon Nov 4 00:47:37 2024 -0800
+
+    attempting to resolve errors
+
+commit 1869fa0aa7cdd3443dad95450109511d4a18f403
+Author: christine nguyen <cminhng@cmng-MacBook-Pro.local>
+Date:   Sun Nov 3 22:48:19 2024 -0800
+
+    user input was causing failures. reworked main
+
+commit f1bbf65a82b8f96bbca4e261b285128bfcc901af
+Author: christine nguyen <cminhng@cmng-MacBook-Pro.local>
+Date:   Sun Nov 3 22:32:08 2024 -0800
+
+    implemented option 1 and option 2
+
+commit f40bd83b5dc4b33156dd92dd39369cd6cba9899b
+Author: christine nguyen <cminhng@cmng-MacBook-Pro.local>
+Date:   Sun Nov 3 20:38:16 2024 -0800
+
+    finished processText working on main()
+
+commit 21890acdb02641b909b6577d8d6b349f142ee2fc
+Author: christine nguyen <cminhng@cmng-MacBook-Pro.local>
+Date:   Fri Nov 1 20:43:11 2024 -0700
+
+    filled out exception classes, working on process file in wordcounter
+
+commit bcd4af75f3365ec4ec9dc952b0a5572e5c4241a9
+Author: christine nguyen <cminhng@cmng-MacBook-Pro.local>
+Date:   Mon Oct 21 11:32:34 2024 -0700
+
+    added all files
+
+commit 6470475e2bcc2f13c6e2913b7700d21fc9effd68
+Author: cminhng <christine.nguyen1@gwmail.gwu.edu>
+Date:   Mon Oct 21 11:29:21 2024 -0700
+
+    Add files via upload
